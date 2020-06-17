@@ -1,0 +1,11 @@
+
+.menu {
+    display: flex; 
+    background-color: lightblue;
+    padding: 10px; 
+    color: white; 
+}
+
+.menu div {
+    margin: 8px; 
+}

@@ -1,7 +1,6 @@
 
 const initialState = {
-    cartItems: [], 
-    isAuthenticated: false  
+    cartItems: [] 
 }
 
 const reducer = (state = initialState, action) => {
@@ -11,12 +10,7 @@ const reducer = (state = initialState, action) => {
             ...state,
             cartItems: state.cartItems.concat(action.payload)
         }
-    } else if(action.type == 'AUTHENTICATED') {
-        return {
-            ...state, 
-            isAuthenticated: action.value 
-        }
-    }
+    } 
 
     return state 
 }

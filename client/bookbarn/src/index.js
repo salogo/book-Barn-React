@@ -3,21 +3,36 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {createStore} from 'redux'
-import {Provider} from 'react-redux'
+import { createStore, combineReducers } from "redux"
 import reducer from './store/reducer'
+import { Provider } from 'react-redux'
+import { BaseLayout } from './components/BaseLayout';
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import ViewCart from './components/ViewCart';
+import Login from './components/Login';
+import cartReducer from './store/reducers/cart'
+import loginReducer from './store/reducers/login'
 
+const rootReducer = combineReducers({
+  cartRed: cartReducer, 
+  loginRed: loginReducer
+})
 
-const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
-
+const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 ReactDOM.render(
-  <React.StrictMode>  
-  <Provider store={store}>   
-    <App />
+  <React.StrictMode>
+    <Provider store={store}>
+      <BrowserRouter>
+        <BaseLayout>
+          <Switch>
+            <Route component = {App} path = "/" exact />
+            <Route component = {ViewCart} path = "/view-cart" />
+            <Route component = {Login} path = "/login" />
+
+          </Switch>
+        </BaseLayout>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
